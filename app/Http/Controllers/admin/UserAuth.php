@@ -9,10 +9,10 @@ use Illuminate\View\View;
 
 class UserAuth extends Controller
 {
-    function create_account() : Response {
+    function create_account() {
         return response()->json("zdmnvcdfm");
     }
-    function login() : Response {
+    function login() {
         return response()->json("xfbvjfd");
     }
 }
