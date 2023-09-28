@@ -22,6 +22,12 @@ class Controller extends BaseController
         return view('comingsoon');
     }
 
+
+    function err404(): View
+    {
+        return view('error_page.404');
+    }
+
     // Return Type: Integer
     public function getAge(): int
     {
