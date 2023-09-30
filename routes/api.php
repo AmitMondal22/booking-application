@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customer\API\CustomerApiAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
+Route::prefix('customer')->group(function () {
+    Route::post('/register',[CustomerApiAuth::class,'register']);
+    Route::post('/login',[CustomerApiAuth::class,'login']);
+});
 
