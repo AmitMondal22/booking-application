@@ -75,13 +75,6 @@ class CustomerApiAuth extends ResponceBaseController
             } else {
                 return $this->sendError("user not found", null, 400);
             }
-            // if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            //     $user = Auth::user();
-            //     $success['token'] =  $user->createToken('MyApp')->plainTextToken;
-            //     $success['name'] =  $user->name;
-
-            //     return $this->sendResponse($success, 'User login successfully.');
-            // }
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
