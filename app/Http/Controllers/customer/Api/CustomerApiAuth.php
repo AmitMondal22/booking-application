@@ -32,6 +32,9 @@ class CustomerApiAuth extends ResponceBaseController
                 'mobile' => $r->mobile,
                 'password' => Hash::make($r->password),
                 'type' => '1',
+                'otp'=>$otp,
+                'otp_status'=>'1',
+                'active_status'=>'1'
             ]);
             return $this->sendResponse($data, "User registered successfully");
         } catch (\Throwable $th) {
@@ -40,18 +43,47 @@ class CustomerApiAuth extends ResponceBaseController
     }
 
 
-    public function login(Request $request): JsonResponse
+    public function login(Request $r): JsonResponse
     {
 
-        $this->validate($request, [
-            'username' => 'required|unique:users',
-            'password' => 'required|min:6',
+        try {
+            $rules = [
+                'username' => 'required',
+                'password' => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/'
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
 
-        ]);
+            $searchTerm = $r->username;
+            $data = User::where('active_status','1')->where(function ($query) use ($searchTerm) {
+                $query->where('mobile', '=', $searchTerm)
+                    ->orWhere('email', '=', $searchTerm);
+            })->first();
+            if (!empty($data)) {
+                if (Hash::check($r->password, $data->password)) {
 
+                    $returndata = [
+                        "user_info" => $data,
+                        "token" => $data->createToken($data->name, ['1'])->plainTextToken
+                    ];
+                    return $this->sendResponse($returndata, "login successfully");
+                } else {
+                    return $this->sendError("invalid password", null, 400);
+                }
+            } else {
+                return $this->sendError("user not found", null, 400);
+            }
+            // if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            //     $user = Auth::user();
+            //     $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+            //     $success['name'] =  $user->name;
 
-
-        // Return a success response
-        return response()->json(['message' => 'User registered successfully'], 201);
+            //     return $this->sendResponse($success, 'User login successfully.');
+            // }
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
     }
 }

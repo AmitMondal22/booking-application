@@ -46,7 +46,7 @@ class UserAuth extends ResponceBaseController
         $input = $request->all();
 
         $this->validate($request, [
-            'email' => 'required|email',
+            'user' => 'required|email',
             'password' => 'required',
         ]);
 
