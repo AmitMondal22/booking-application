@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomerApiAuth extends ResponceBaseController
 {
-    public function register(Request $r): JsonResponse
+    function register(Request $r): JsonResponse
     {
         try {
             $rules = [
@@ -43,7 +43,7 @@ class CustomerApiAuth extends ResponceBaseController
     }
 
 
-    public function login(Request $r): JsonResponse
+    function login(Request $r): JsonResponse
     {
 
         try {
@@ -78,5 +78,10 @@ class CustomerApiAuth extends ResponceBaseController
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
+    }
+
+    function test(Request $r):JsonResponse
+    {
+        return $this->sendResponse($r->name, "login successfully");
     }
 }
