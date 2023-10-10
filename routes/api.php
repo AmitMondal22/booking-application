@@ -32,6 +32,4 @@ Route::prefix("test")->group(function(){
 });
 
 
-Route::get('/', function () {
-    return "hello";
-});
+Route::get('/', [CustomerApiAuth::class,'test']);
