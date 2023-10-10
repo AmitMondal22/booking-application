@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\customer\API\CustomerApiAuth;
+use App\Http\Controllers\customer\api\CustomerApiAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

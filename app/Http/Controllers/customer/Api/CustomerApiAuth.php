@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\customer\API;
+namespace App\Http\Controllers\customer\api;
 
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
