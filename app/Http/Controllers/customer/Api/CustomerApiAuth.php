@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class CustomerApiAuth extends ResponceBaseController
+class CustomerApiAuth extends Controller
 {
     function register(Request $r): JsonResponse
     {
