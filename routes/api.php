@@ -27,6 +27,6 @@ Route::prefix('customer')->group(function () {
 
 
 Route::prefix("test")->group(function(){
-    Route::post('/test',[CustomerApiAuth::class,'test']);
+    Route::get('/test',[CustomerApiAuth::class,'test']);
 });
 
