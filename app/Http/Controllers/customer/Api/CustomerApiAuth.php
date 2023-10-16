@@ -80,7 +80,7 @@ class CustomerApiAuth extends Controller
         }
     }
 
-    function test(Request $r):JsonResponse
+    public function test(Request $r):JsonResponse
     {
         return $this->sendResponse($r->name, "login successfully");
     }
