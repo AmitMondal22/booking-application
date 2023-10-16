@@ -14,7 +14,7 @@ class CustomerApiAuth extends ResponceBaseController
 {
     function register(Request $r): JsonResponse
     {
-        try {
+        try { 
             $rules = [
                 'name' => 'required',
                 'email' => 'required|email',
