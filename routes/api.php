@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('customer')->group(function () {
-    Route::post('/register',[CustomerApiAuth::class,'register']);
+    Route::match(['get','post'],'/register',[CustomerApiAuth::class,'register']);
     Route::post('/login',[CustomerApiAuth::class,'login']);
 });
 
